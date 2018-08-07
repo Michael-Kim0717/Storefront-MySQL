@@ -60,5 +60,3 @@ VALUES ("Cell Phone Stand", "Electronics and Accessories", 6.99, 14, 0);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
 VALUES ("Cast Iron Pan", "Home and Kitchen", 11.50, 7, 0);
-
-UPDATE products SET department_name = "Electronics and Accessories" WHERE department_name = "Electronics and Accessorise"
