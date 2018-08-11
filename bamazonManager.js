@@ -96,25 +96,36 @@ function addToInventory (){
         {
             name: "id",
             message: "Enter the ID of the item you would like to restock.",
-            type: "input"
+            type: "input",
+            validate: function(input){
+                // Declare function as asynchronous, and save the done callback
+                var done = this.async();
+                
+                // Do async stuff
+                setTimeout(function() {
+                    if (isNaN(input)) {
+                        // Pass the return value in the done callback
+                        done('Wrong input, please provide a valid number.');
+                        return;
+                    }
+                    else {
+                        // Pass the return value in the done callback
+                        done(null, true);
+                    }
+                }, 3000);
+            }
         }
     ]).then(function(response){
-        if (isNaN(response.id)){
-            console.log("Wrong Input. Please enter in a number.\n");
-            addToInventory();
-        }
-        else {
-            connection.query("SELECT * FROM products WHERE item_id = " + response.id, function(error, results){
-                if (results.length == 0){
-                    console.log("That item does not exist in our database. Please enter in a valid number.\n");
-                    addToInventory();
-                }
-                else {
-                    console.log("You have selected " + results[0].product_name + "\n");
-                    addQuantityToInventory(results);
-                }
-            });
-        }
+        connection.query("SELECT * FROM products WHERE item_id = " + response.id, function(error, results){
+            if (results.length == 0){
+                console.log("That item does not exist in our database. Please enter in a valid number.\n");
+                addToInventory();
+            }
+            else {
+                console.log("You have selected " + results[0].product_name + "\n");
+                addQuantityToInventory(results);
+            }
+        });
     })
 }
 function addQuantityToInventory (idSelected){
@@ -122,34 +133,45 @@ function addQuantityToInventory (idSelected){
         {
             name: "quantity",
             message: "How many items would you like to add?",
-            type: "input"
+            type: "input",
+            validate: function(input){
+                // Declare function as asynchronous, and save the done callback
+                var done = this.async();
+                
+                // Do async stuff
+                setTimeout(function() {
+                    if (isNaN(input)) {
+                        // Pass the return value in the done callback
+                        done('Wrong input, please provide a valid number.');
+                        return;
+                    }
+                    else {
+                        // Pass the return value in the done callback
+                        done(null, true);
+                    }
+                }, 3000);
+            }
         }
     ]).then(function(response){
-        if (isNaN(response.quantity)){
-            console.log("Wrong Input. Please enter in a number.\n");
-            addQuantityToInventory(idSelected);
-        }
-        else {
-            connection.query("UPDATE products SET stock_quantity = " + (parseInt(idSelected[0].stock_quantity) + parseInt(response.quantity)) + " WHERE item_id = " + idSelected[0].item_id);
-            console.log(response.quantity + " " + idSelected[0].product_name + "(s) added. Here is the data for the item now.\n");
-            connection.query("\nSELECT * FROM products WHERE item_id = " + idSelected[0].item_id, function(error, results){
-                console.log("| " + center("item_id", 10) + " | " + center("product_name", 30) + " | " + center("department_name", 31) + " | " + center("price", 10) + " | " + center("stock_quantity", 14) + " | " + center("product_sales", 14) + " |");
-                console.log("".padEnd(125, "-"));
-                for (var i = 0; i < results.length; i++){
-                    console.log(
-                        "| " + 
-                        JSON.stringify(results[i].item_id).padEnd(9, " ") + " | " +
-                        JSON.stringify(results[i].product_name).padEnd(30, " ") + " | " + 
-                        JSON.stringify(results[i].department_name).padEnd(31) + " | " + 
-                        "$" + JSON.stringify(results[i].price).padEnd(8) + " | " +
-                        JSON.stringify(results[i].stock_quantity).padEnd(14) + " | " +
-                        "$" + JSON.stringify(results[i].product_sales).padEnd(12) + " |"
-                    );
-                }
-                console.log("".padEnd(125, "-") + "\n");
-                performAnotherAction();
-            });
-        }
+        connection.query("UPDATE products SET stock_quantity = " + (parseInt(idSelected[0].stock_quantity) + parseInt(response.quantity)) + " WHERE item_id = " + idSelected[0].item_id);
+        console.log(response.quantity + " " + idSelected[0].product_name + "(s) added. Here is the data for the item now.\n");
+        connection.query("\nSELECT * FROM products WHERE item_id = " + idSelected[0].item_id, function(error, results){
+            console.log("| " + center("item_id", 10) + " | " + center("product_name", 30) + " | " + center("department_name", 31) + " | " + center("price", 10) + " | " + center("stock_quantity", 14) + " | " + center("product_sales", 14) + " |");
+            console.log("".padEnd(125, "-"));
+            for (var i = 0; i < results.length; i++){
+                console.log(
+                    "| " + 
+                    JSON.stringify(results[i].item_id).padEnd(9, " ") + " | " +
+                    JSON.stringify(results[i].product_name).padEnd(30, " ") + " | " + 
+                    JSON.stringify(results[i].department_name).padEnd(31) + " | " + 
+                    "$" + JSON.stringify(results[i].price).padEnd(8) + " | " +
+                    JSON.stringify(results[i].stock_quantity).padEnd(14) + " | " +
+                    "$" + JSON.stringify(results[i].product_sales).padEnd(12) + " |"
+                );
+            }
+            console.log("".padEnd(125, "-") + "\n");
+            performAnotherAction();
+        });
     })
 }
 function addNewProduct (idSelected) {

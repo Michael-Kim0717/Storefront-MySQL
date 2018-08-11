@@ -52,11 +52,12 @@ function viewSales(){
                 "| " + 
                 JSON.stringify(results[i].department_id).padEnd(15, " ") + " | " +
                 JSON.stringify(results[i].department_name).padEnd(29, " ") + " | " + 
-                "$" + JSON.stringify(results[i].over_head_costs).padEnd(18) + " | " +
-                "$" + JSON.stringify(results[i].total_sales).padEnd(18) + " |"
+                "$" + parseFloat(JSON.stringify(results[i].over_head_costs)).toFixed(2).padEnd(18) + " | " +
+                "$" + parseFloat(JSON.stringify(results[i].total_sales)).toFixed(2).padEnd(18) + " |"
             );
         }
         console.log("".padEnd(95, "-") + "\n");
+        performAnotherAction();
     });
 }
 function addDept(){
@@ -91,7 +92,19 @@ function addDept(){
     ]).then(function(response){
         console.log(response.name + " department has been added.\n")
         connection.query("INSERT INTO departments (department_name, over_head_costs) VALUES ('" + response.name + "', " + response.overheadcosts + ")");
-        performAnotherAction();
+        connection.query("SELECT * FROM departments WHERE department_name = '" + response.name + "' AND over_head_costs = " + response.overheadcosts, function(error, results){
+            console.log("\n| " + center("department_id", 15) + " | " + center("department_name", 30) + " | " + center("over_head_costs", 20) + " | " + center("total_sales", 20) + " |");
+            console.log("".padEnd(95, "-"));
+            console.log(
+                "| " + 
+                JSON.stringify(results[0].department_id).padEnd(15, " ") + " | " +
+                JSON.stringify(results[0].department_name).padEnd(29, " ") + " | " + 
+                "$" + parseFloat(JSON.stringify(results[0].over_head_costs)).toFixed(2).padEnd(18) + " | " +
+                "$0".padEnd(19) + " |"
+            );
+            console.log("".padEnd(95, "-") + "\n");
+            performAnotherAction();
+        });
     });
 }
 function performAnotherAction (){

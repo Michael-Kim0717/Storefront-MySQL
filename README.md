@@ -1,6 +1,6 @@
 # Storefront-MySQL
 
-A Node application that utilizes a MySQL database.
+A Node application that utilizes a MySQL database in order to provide a simple replication for a sample online retailer.
 
 ### GETTING STARTED
 
@@ -11,6 +11,7 @@ Node.js : a JavaScript run-time environment that executes its code outside of th
     center-align : a Node.js package that allows for easier console text alignment and management.
     inquirer : a Node.js package that allows for user input.
     mysql : a Node.js package that allows for MySQL connections and queries to be run.
+SQL Database : a language used to store and manipulate data within a Relational Database Management System (RDBMS).
 ```
 
 #### INSTALLATION GUIDE
@@ -131,18 +132,27 @@ VALUES ("Sports and Outdoors", 328);
 
 ### DEMO
 
-- Insert Video Here
+![Storefront-MySQL Demo](./images/bamazon.webm)
 
 ### WEBSITE AND IMAGES
 
 #### bamazonCustomer.js
-- Customer Image
+
+Customers have the opportunity to view the store's directory as well as purchase items. These purchases will be logged into respective item sales for managers and supervisors to view.
+
+![bamazon Customer](./images/customer.png)
 
 #### bamazonManager.js
-- Manager Image
+
+Managers are given the choices to view the list of products, view items that are low on inventory, restock items, and add new items.
+
+![bamazon Manager](./images/manager.png)
 
 #### bamazonSupervisor.js
-- Supervisor Image
+
+Supervisors hold a lesser, but overall role of adding new departments into the system as well as viewing the sales provided by each individual department.
+
+![bamazon Supervisor](./images/supervisor.png)
 
 ### TO-DO / BUGS
 - Node programs must be exited manually.
