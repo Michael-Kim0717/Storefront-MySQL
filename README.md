@@ -7,11 +7,17 @@ A Node application that utilizes a MySQL database in order to provide a simple r
 #### BUILT-WITH
 
 ```
-Node.js : a JavaScript run-time environment that executes its code outside of the browser. 
-    center-align : a Node.js package that allows for easier console text alignment and management.
-    inquirer : a Node.js package that allows for user input.
-    mysql : a Node.js package that allows for MySQL connections and queries to be run.
-SQL Database : a language used to store and manipulate data within a Relational Database Management System (RDBMS).
+    Languages and Database :
+    
+    JAVASCRIPT
+    MYSQL
+    
+    Node Packages :
+
+    center-align : center-align the text in a string
+    inquirer : a collection of common interactive command line user interfaces
+    mysql : a node.js driver for mysql
+
 ```
 
 #### INSTALLATION GUIDE
