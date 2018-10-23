@@ -9,8 +9,9 @@ A Node application that utilizes a MySQL database in order to provide a simple r
 ```
     Languages and Database :
     
-    JAVASCRIPT
-    MYSQL
+    Javascript
+    Node
+    MySQL
     
     Node Packages :
 
@@ -161,4 +162,5 @@ Supervisors hold a lesser, but overall role of adding new departments into the s
 ![bamazon Supervisor](./images/supervisor.png)
 
 ### TO-DO / BUGS
-- Node programs must be exited manually.
+
+Bug : Node programs must be exited manually.
